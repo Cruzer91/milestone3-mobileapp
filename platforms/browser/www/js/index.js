@@ -16,7 +16,26 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var events =[{slug: "how to pass class", body: "Come to Class bro"}];
+
+ var util = {
+   store: function(namespace,data){
+     if(arguments.length > 1)
+     {
+       console.log('Two arguments were passeed, Saved the Data');
+       return localStorage.setItem(namespace,JSON.sringify(data));
+     }else {
+       var store = localStorage.getItem(namespace);
+       if(store)
+       {
+         return JSON.parse(store);
+       }else {
+        //  return no data
+        return [];
+       }
+     }
+   }
+ };
+
 
 var app = {
     // Application Constructor
@@ -35,33 +54,66 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.render('appContainer');
-        $('#submit').on('click', app.addEntry);
+      app.posts = util.store('posts');
+        app.loadTemplates();
+        app.render('appContainer', 'entries', {posts: app.posts});
+        app.registerCallbacks();
+    },
+    loadTemplates: function(){
+
+      var templateList = ['entries','addEntryForm'];
+
+      var templateText = '';
+
+      app.templates = {};
+
+      for(var i = 0; i < templateList.length; i++)
+      {
+        var templateText = document.getElementById(templateList[i]).text;
+
+        app.templates[i] = new EJS({text: templateText});
+      }
+    },
+    registerCallbacks: function()
+    {
+      $('body').on('click','a',function(evt){
+        // prevent default will make it so it does not follow the link
+        evt.preventDefault();
+        history.pushState({},'',$(this).attr('href'));
+        app.route(location.pathname);
+      })
+      $('#appContainer').on('click','#submit',app.addEntry);
+
+    },
+    route: function(path)
+    {
+      if(path === '/add'){
+        app.render('appContainer', 'addEntryForm', {});
+      }
+      app.render('appContainer', 'entries', {posts: app.posts})
     },
     addEntry: function(evt){
         evt.preventDefault();
 
         var slug = $('#slug').val();
         var body = $('#body').val();
+
         var entry = {slug: slug, body: body};
-        events.push(entry);
-        app.render('appContainer');
+
+        app.posts.push(entry);
+        util.store('posts',app.posts);
+
+        app.render('appContainer', 'entries',{posts: app.posts});
+
+        $('#formForEntries').hide();
     },
     // Update DOM on a Received Event
-    render: function(id) {
+    render: function(id, template, data) {
         var containerElement = document.getElementById(id);
 
-        var templateText = document.getElementById('entries');
-
-        var html = new EJS({text: templateText}).render({events: events});
+        var html = app.templateList[template].render(data);
 
         containerElement.innerHTML = html;
-
-        $(".delete").on('click',function(evt){
-          var entryID = $(this).attr('data-id');
-          $(this).data('id');
-          entry.splice(entryID,1);
-        })
 
 
     }
