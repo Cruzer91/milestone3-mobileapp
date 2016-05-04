@@ -1,0 +1,19 @@
+body {
+  padding: 0;
+  background-image: url(../img/picture_of_people_learning.jpg);
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center top;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100px;
+    background-color: grey;
+}
+h1 {
+  text-align: center;
+  color:grey;
+}

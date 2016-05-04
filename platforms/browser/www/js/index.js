@@ -22,7 +22,7 @@
      if(arguments.length > 1)
      {
        console.log('Two arguments were passeed, Saved the Data');
-       return localStorage.setItem(namespace,JSON.sringify(data));
+       return localStorage.setItem(namespace,JSON.stringify(data));
      }else {
        var store = localStorage.getItem(namespace);
        if(store)
@@ -35,7 +35,6 @@
      }
    }
  };
-
 
 var app = {
     // Application Constructor
@@ -61,7 +60,7 @@ var app = {
     },
     loadTemplates: function(){
 
-      var templateList = ['entries','addEntryForm'];
+      var templateList = ['entries','addEntryForm','singleEntry'];
 
       var templateText = '';
 
@@ -71,7 +70,7 @@ var app = {
       {
         var templateText = document.getElementById(templateList[i]).text;
 
-        app.templates[i] = new EJS({text: templateText});
+        app.templates[templateList[i]] = new EJS({text: templateText});
       }
     },
     registerCallbacks: function()
@@ -79,18 +78,27 @@ var app = {
       $('body').on('click','a',function(evt){
         // prevent default will make it so it does not follow the link
         evt.preventDefault();
-        history.pushState({},'',$(this).attr('href'));
+        history.pushState({}, '', $(this).attr('href'));
         app.route(location.pathname);
       })
       $('#appContainer').on('click','#submit',app.addEntry);
+      $('#appContainer').on('click', '.delete', app.deleteEntry);
 
     },
     route: function(path)
     {
       if(path === '/add'){
         app.render('appContainer', 'addEntryForm', {});
+        return
       }
-      app.render('appContainer', 'entries', {posts: app.posts})
+      if(/\/entries\/(\d*)/.test(path) )
+      {
+        var id = parseInt(  path.match(/\/entries\/(\d*)/)[1]  );
+        app.render('appContainer', 'singleEntry', {post: app.posts[id]});
+        return
+      }
+
+      app.render('appContainer', 'entries', {posts: app.posts});
     },
     addEntry: function(evt){
         evt.preventDefault();
@@ -107,15 +115,20 @@ var app = {
 
         $('#formForEntries').hide();
     },
+    deleteEntry: function(){
+      var entryID = $(this).attr('data-id');
+      app.posts.splice(entryID, 1);
+      util.store('posts', app.posts);
+
+      app.render("appContainer", "entries", {posts: app.posts});
+    },
     // Update DOM on a Received Event
     render: function(id, template, data) {
         var containerElement = document.getElementById(id);
 
-        var html = app.templateList[template].render(data);
+        var html = app.templates[template].render(data);
 
         containerElement.innerHTML = html;
-
-
     }
 };
 
