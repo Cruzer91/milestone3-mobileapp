@@ -1,19 +1,50 @@
 body {
   padding: 0;
-  background-image: url(../img/picture_of_people_learning.jpg);
+  background-image: url(../img/Gateway_to_Heaven.jpg);
   background-size:     cover;
   background-repeat:   no-repeat;
   background-position: center top;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 100px;
-    background-color: grey;
-}
 h1 {
   text-align: center;
-  color:grey;
+  color:white;
+}
+
+ul{
+  list-style-type: none;
+  margin: 10px 10px 10px 10px;
+
+}
+
+form {
+  diplay: inline-block;
+  text-align: center;
+  border-radius: 5px;
+  background-color: grey;
+}
+input[type=text] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type = submit] {
+  background-color: blue;
+
+}
+.delete {
+  text-align: center;
+  background-color: red;
+}
+
+li {
+  display: inline;
+  padding-right: 20px;
+}
+
+#entry {
+  border-radius: 5px;
+  background-color: white;
 }
