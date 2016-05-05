@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <icon src="../img/lightbulb.jpg" platform="android" width="57" height="57" density="mdpi" />
     <name>My_TIL_App</name>
     <description>
         Simple app that lets you enter thing you have learned that day and keeps them in local memory.
@@ -18,6 +17,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <platform name="android">
+        <icon src="../img/lightbulb.jpg" width="180" height="180"/>
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">

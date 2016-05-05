@@ -1,9 +1,11 @@
 body {
-  padding: 0;
+  /*padding: 0;
   background-image: url(../img/Gateway_to_Heaven.jpg);
-  background-size:     cover;
+  background-size: cover;
   background-repeat:   no-repeat;
-  background-position: center top;
+  background-position: center top;*/
+  background: black;
+  color: white;
 }
 
 h1 {
@@ -13,8 +15,17 @@ h1 {
 
 ul{
   list-style-type: none;
-  margin: 10px 10px 10px 10px;
+  text-align: center;
+  margin: 50px 10px 50px 10px;
 
+}
+
+a:visited {
+  color: darkgrey;
+}
+
+a:hover {
+  color: blue;
 }
 
 form {
@@ -22,12 +33,14 @@ form {
   text-align: center;
   border-radius: 5px;
   background-color: grey;
+  color: blue;
 }
 input[type=text] {
     width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+    
 }
 
 input[type = submit] {
@@ -36,7 +49,7 @@ input[type = submit] {
 }
 .delete {
   text-align: center;
-  background-color: red;
+  background-color: blue;
 }
 
 li {
