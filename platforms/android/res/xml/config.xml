@@ -5,10 +5,11 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <icon height="180" src="../img/lightbulb.jpg" width="180" />
     <allow-intent href="market:*" />
-    <name>HelloCordova</name>
+    <name>My_TIL_App</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Simple app that lets you enter thing you have learned that day and keeps them in local memory.
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team

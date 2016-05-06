@@ -1,5 +1,6 @@
 body {
-  /*padding: 0;
+  /* Took this out because the picture I was trying to use would not fit the screen like I wanted, also didn't show text too well.
+  padding: 0;
   background-image: url(../img/Gateway_to_Heaven.jpg);
   background-size: cover;
   background-repeat:   no-repeat;
@@ -40,7 +41,7 @@ input[type=text] {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-    
+
 }
 
 input[type = submit] {
